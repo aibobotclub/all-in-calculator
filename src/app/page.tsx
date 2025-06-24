@@ -201,7 +201,7 @@ export default function Home() {
             <Chart data={result.dailyDetails} />
           </div>
         )}
-      </div>
+    </div>
     </main>
   );
 }
