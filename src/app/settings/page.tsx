@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
@@ -10,12 +10,27 @@ import LanguageSwitch from '@/components/LanguageSwitch';
 export default function Settings() {
   const { t } = useTranslation();
   const [params, setParams] = useState({
-    dailyROI: DEFAULT_PARAMS.defaultDailyROI * 100, // 转换为百分比显示
+    dailyROI: DEFAULT_PARAMS.defaultDailyROI * 100, 
     platformFee: DEFAULT_PARAMS.defaultPlatformFee * 100,
   });
 
+  // 从localStorage加载保存的参数
+  useEffect(() => {
+    const savedParams = localStorage.getItem('calculatorParams');
+    if (savedParams) {
+      try {
+        const { dailyROI, platformFee } = JSON.parse(savedParams);
+        setParams({
+          dailyROI: dailyROI * 100,
+          platformFee: platformFee * 100,
+        });
+      } catch (error) {
+        console.error('Failed to parse saved params:', error);
+      }
+    }
+  }, []);
+
   const handleSave = () => {
-    // 这里可以添加保存到localStorage或其他存储的逻辑
     localStorage.setItem('calculatorParams', JSON.stringify({
       dailyROI: params.dailyROI / 100,
       platformFee: params.platformFee / 100,
@@ -51,13 +66,16 @@ export default function Settings() {
                   type="range"
                   min={PARAMS_RANGE.dailyROI.min * 100}
                   max={PARAMS_RANGE.dailyROI.max * 100}
-                  step="0.1"
+                  step="0.05"
                   value={params.dailyROI}
-                  onChange={(e) => setParams({ ...params, dailyROI: parseFloat(e.target.value) })}
+                  onChange={(e) => {
+                    const value = parseFloat(e.target.value);
+                    setParams({ ...params, dailyROI: Math.min(Math.max(value, PARAMS_RANGE.dailyROI.min * 100), PARAMS_RANGE.dailyROI.max * 100) });
+                  }}
                   className="w-full"
                 />
                 <span className="text-sm font-medium text-gray-900 min-w-[60px]">
-                  {params.dailyROI.toFixed(1)}%
+                  {params.dailyROI.toFixed(2)}%
                 </span>
               </div>
             </div>
@@ -73,7 +91,10 @@ export default function Settings() {
                   max={PARAMS_RANGE.platformFee.max * 100}
                   step="1"
                   value={params.platformFee}
-                  onChange={(e) => setParams({ ...params, platformFee: parseFloat(e.target.value) })}
+                  onChange={(e) => {
+                    const value = parseFloat(e.target.value);
+                    setParams({ ...params, platformFee: Math.min(Math.max(value, PARAMS_RANGE.platformFee.min * 100), PARAMS_RANGE.platformFee.max * 100) });
+                  }}
                   className="w-full"
                 />
                 <span className="text-sm font-medium text-gray-900 min-w-[60px]">

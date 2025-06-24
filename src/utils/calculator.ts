@@ -68,7 +68,7 @@ export function calculateInvestment(params: CalculatorParams): CalculationResult
     // 添加今天的复投记录（30天后释放本金）
     if (reinvestANT > 0) {
       // 计算复投每日产生的收益（利润*次数）
-      const reinvestDailyReturn = reinvestANT * dailyROI * DEFAULT_PARAMS.dailyFrequency;
+      const reinvestDailyReturn = reinvestANT * dailyROI * DEFAULT_PARAMS.dailyFrequency * (1 + stakingBonus);
       reinvestRecords.push({
         amount: reinvestANT,
         maturityDay: day + 30,
