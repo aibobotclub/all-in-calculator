@@ -57,7 +57,7 @@ export default function Home() {
       platformFee: params.platformFee.toString()
     }).toString();
     
-    router.push(`/daily-details?${queryParams}`);
+    router.push(`/daily-details?${queryParams}`, { scroll: false });
   };
 
   return (
