@@ -1,0 +1,54 @@
+{
+  "calculator": {
+    "title": "All-in Calculator",
+    "subtitle": "ASC Staking Simulator",
+    "input": {
+      "investment": "Investment Amount (USDT)",
+      "stakingPeriod": "Staking Period",
+      "releasePeriod": "Release Period",
+      "days": "Days",
+      "calculate": "Calculate"
+    },
+    "result": {
+      "ascAmount": "ASC Amount",
+      "totalRelease": "Total Release ANT",
+      "monthlyRelease": "Monthly Release ANT",
+      "dailyAverage": "Daily Average ANT",
+      "viewDetails": "View Daily Details"
+    },
+    "settings": {
+      "title": "Settings",
+      "dailyROI": "Daily ROI",
+      "platformFee": "Platform Fee",
+      "releaseRatio": "Release Ratio",
+      "reinvestRatio": "Reinvest Ratio",
+      "dailyFrequency": "Daily Frequency",
+      "times": "times/day",
+      "stakingBonus": "Staking Period Bonus",
+      "burnFee": "Release Period Burn Fee",
+      "save": "Save Settings",
+      "back": "Back to Calculator",
+      "fixedParams": "Fixed Parameters"
+    },
+    "details": {
+      "title": "Daily Details",
+      "day": "Day",
+      "releaseANT": "Release ANT",
+      "reinvestANT": "Reinvest ANT",
+      "reinvestRelease": "Reinvest Release",
+      "maturityRelease": "Maturity Release",
+      "totalANT": "Total ANT",
+      "roi": "ROI",
+      "back": "Back to Calculator",
+      "overview": "Investment Overview",
+      "usdtValue": "USDT Value"
+    },
+    "chart": {
+      "title": "Daily ANT Release Chart",
+      "day": "Day",
+      "releaseANT": "Staking Release",
+      "reinvestEarnings": "Reinvest Earnings",
+      "totalDailyANT": "Daily Total"
+    }
+  }
+} 

@@ -1,0 +1,54 @@
+{
+  "calculator": {
+    "title": "All-in 计算器",
+    "subtitle": "ASC 质押模拟器",
+    "input": {
+      "investment": "投资金额 (USDT)",
+      "stakingPeriod": "质押周期",
+      "releasePeriod": "释放周期",
+      "days": "天",
+      "calculate": "计算收益"
+    },
+    "result": {
+      "ascAmount": "ASC 数量",
+      "totalRelease": "总释放 ANT",
+      "monthlyRelease": "每月释放 ANT",
+      "dailyAverage": "平均每日 ANT",
+      "viewDetails": "查看每日详情"
+    },
+    "settings": {
+      "title": "参数设置",
+      "dailyROI": "每日收益率",
+      "platformFee": "平台手续费",
+      "releaseRatio": "释放比例",
+      "reinvestRatio": "复投比例",
+      "dailyFrequency": "每日频率",
+      "times": "次/天",
+      "stakingBonus": "质押周期收益加成",
+      "burnFee": "释放周期燃烧费",
+      "save": "保存设置",
+      "back": "返回计算器",
+      "fixedParams": "固定参数"
+    },
+    "details": {
+      "title": "每日详情",
+      "day": "天数",
+      "releaseANT": "释放 ANT",
+      "reinvestANT": "复投 ANT",
+      "reinvestRelease": "复投产生 ANT",
+      "maturityRelease": "到期释放 ANT",
+      "totalANT": "总 ANT",
+      "roi": "收益率",
+      "back": "返回计算器",
+      "overview": "投资概览",
+      "usdtValue": "USDT 价值"
+    },
+    "chart": {
+      "title": "ANT 每日释放图表",
+      "day": "第 {day} 天",
+      "releaseANT": "质押释放",
+      "reinvestEarnings": "复投收益",
+      "totalDailyANT": "每日总计"
+    }
+  }
+} 
