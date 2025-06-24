@@ -10,8 +10,8 @@ import LanguageSwitch from '@/components/LanguageSwitch';
 export default function Settings() {
   const { t } = useTranslation();
   const [params, setParams] = useState({
-    dailyROI: DEFAULT_PARAMS.dailyROI * 100, // 转换为百分比显示
-    platformFee: DEFAULT_PARAMS.platformFee * 100,
+    dailyROI: DEFAULT_PARAMS.defaultDailyROI * 100, // 转换为百分比显示
+    platformFee: DEFAULT_PARAMS.defaultPlatformFee * 100,
   });
 
   const handleSave = () => {

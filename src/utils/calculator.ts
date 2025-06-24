@@ -2,7 +2,8 @@ import { CalculatorParams, CalculationResult, DailyDetail } from '@/types/calcul
 import {
   STAKING_PERIOD_BONUS,
   RELEASE_PERIOD_BURN_FEE,
-  DEFAULT_PARAMS
+  DEFAULT_PARAMS,
+  TOKEN_PRICES
 } from '@/constants/calculator';
 
 interface DailyReturn {
@@ -25,8 +26,8 @@ export function calculateInvestment(params: CalculatorParams): CalculationResult
     platformFee
   } = params;
 
-  // ASC数量等于USDT投资金额
-  const ascAmount = investmentAmount;
+  // ASC数量等于USDT投资金额除以ASC价格
+  const ascAmount = investmentAmount / TOKEN_PRICES.ASC;
   
   // 计算基础日收益
   const baseAmount = investmentAmount * (1 - platformFee);

@@ -1,5 +1,10 @@
 import { StakingPeriod, ReleasePeriod } from '@/constants/calculator';
 
+export interface TokenPrices {
+  ANT: number;  // ANT价格（USDT）
+  ASC: number;  // ASC价格（USDT）
+}
+
 export interface CalculatorParams {
   investmentAmount: number;  // USDT投资金额
   stakingPeriod: StakingPeriod;    // 质押周期（天）

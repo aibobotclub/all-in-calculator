@@ -13,8 +13,9 @@ import {
   ChartBarIcon
 } from '@heroicons/react/24/outline';
 import LanguageSwitch from '@/components/LanguageSwitch';
+import { Suspense } from 'react';
 
-export default function DailyDetails() {
+function DailyDetailsContent() {
   const { t } = useTranslation();
   const searchParams = useSearchParams();
   
@@ -144,5 +145,17 @@ export default function DailyDetails() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function DailyDetails() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-500"></div>
+      </div>
+    }>
+      <DailyDetailsContent />
+    </Suspense>
   );
 } 

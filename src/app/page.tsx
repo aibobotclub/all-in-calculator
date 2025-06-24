@@ -24,8 +24,8 @@ export default function Home() {
     investmentAmount: 1000,
     stakingPeriod: STAKING_PERIODS[0],
     releasePeriod: RELEASE_PERIODS[0],
-    dailyROI: DEFAULT_PARAMS.dailyROI,
-    platformFee: DEFAULT_PARAMS.platformFee
+    dailyROI: DEFAULT_PARAMS.defaultDailyROI,
+    platformFee: DEFAULT_PARAMS.defaultPlatformFee
   });
 
   const [result, setResult] = useState<CalculationResult | null>(null);
