@@ -237,7 +237,7 @@ function CommunityDetailsContent() {
                   {t('promotion.community.rewardRate')}
                 </h3>
                 <p className="text-sm md:text-lg font-semibold text-purple-600">
-                  {(rewardRate * 100).toFixed(1)}%
+                  {Math.round(rewardRate * 100)}%
                 </p>
               </div>
             </div>
