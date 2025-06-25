@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
@@ -29,7 +29,7 @@ interface ReinvestRecord {
 
 const PAGE_SIZE_OPTIONS = [20, 50, 100];
 
-export default function CommunityDetails() {
+function CommunityDetailsContent() {
   const { t } = useTranslation();
   const searchParams = useSearchParams();
   const [rewardList, setRewardList] = useState<DailyReward[]>([]);
@@ -402,5 +402,17 @@ export default function CommunityDetails() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function CommunityDetails() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-teal-500"></div>
+      </div>
+    }>
+      <CommunityDetailsContent />
+    </Suspense>
   );
 }
