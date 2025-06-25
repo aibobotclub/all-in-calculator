@@ -139,13 +139,13 @@ export default function ReferralRewards() {
           <div className="px-4 py-5 sm:p-6">
             <div className="space-y-4">
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   {t('promotion.referral.directAccounts')}
                 </label>
-                <div className="flex items-center">
+                <div className="flex items-center shadow-sm rounded-lg overflow-hidden">
                   <button
                     onClick={() => handleDirectReferralsChange(Math.max(1, directReferrals - 1))}
-                    className="px-3 py-2 bg-gray-100 text-gray-600 rounded-l-lg border border-r-0 border-gray-300 hover:bg-gray-200 active:bg-gray-300 focus:outline-none"
+                    className="px-3 py-2.5 bg-gray-50 text-gray-600 border border-r-0 border-gray-300 hover:bg-gray-100 active:bg-gray-200 focus:outline-none"
                   >
                     -
                   </button>
@@ -155,12 +155,12 @@ export default function ReferralRewards() {
                     max="20"
                     value={directReferrals}
                     onChange={(e) => handleDirectReferralsChange(Number(e.target.value))}
-                    className="block w-full text-center border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    style={{ borderRadius: 0 }}
+                    className="block w-full text-center border-gray-300 focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                    style={{ borderRadius: 0, minWidth: 0 }}
                   />
                   <button
                     onClick={() => handleDirectReferralsChange(Math.min(20, directReferrals + 1))}
-                    className="px-3 py-2 bg-gray-100 text-gray-600 rounded-r-lg border border-l-0 border-gray-300 hover:bg-gray-200 active:bg-gray-300 focus:outline-none"
+                    className="px-3 py-2.5 bg-gray-50 text-gray-600 border border-l-0 border-gray-300 hover:bg-gray-100 active:bg-gray-200 focus:outline-none"
                   >
                     +
                   </button>
@@ -171,13 +171,13 @@ export default function ReferralRewards() {
               </div>
 
               <div className="relative">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   {t('promotion.referral.directInvestment')} (ASC)
                 </label>
-                <div className="flex items-center">
+                <div className="flex items-center shadow-sm rounded-lg overflow-hidden">
                   <button
                     onClick={() => setDirectInvestment(Math.max(100, directInvestment - 100))}
-                    className="px-3 py-2 bg-gray-100 text-gray-600 rounded-l-lg border border-r-0 border-gray-300 hover:bg-gray-200 active:bg-gray-300 focus:outline-none"
+                    className="px-3 py-2.5 bg-gray-50 text-gray-600 border border-r-0 border-gray-300 hover:bg-gray-100 active:bg-gray-200 focus:outline-none whitespace-nowrap"
                   >
                     -100
                   </button>
@@ -187,12 +187,12 @@ export default function ReferralRewards() {
                     step="100"
                     value={directInvestment}
                     onChange={(e) => setDirectInvestment(Number(e.target.value))}
-                    className="block w-full text-center border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    style={{ borderRadius: 0 }}
+                    className="block w-full text-center border-gray-300 focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                    style={{ borderRadius: 0, minWidth: 0 }}
                   />
                   <button
                     onClick={() => setDirectInvestment(directInvestment + 100)}
-                    className="px-3 py-2 bg-gray-100 text-gray-600 rounded-r-lg border border-l-0 border-gray-300 hover:bg-gray-200 active:bg-gray-300 focus:outline-none"
+                    className="px-3 py-2.5 bg-gray-50 text-gray-600 border border-l-0 border-gray-300 hover:bg-gray-100 active:bg-gray-200 focus:outline-none whitespace-nowrap"
                   >
                     +100
                   </button>
@@ -219,10 +219,10 @@ export default function ReferralRewards() {
                           <label className="block text-xs text-gray-500 mb-1">
                             {t('promotion.referral.accounts')}
                           </label>
-                          <div className="flex items-center">
+                          <div className="flex items-center shadow-sm rounded-md overflow-hidden">
                             <button
                               onClick={() => handleLevelDataChange(index, 'accounts', Math.max(0, level.accounts - 1))}
-                              className="px-2 py-1 bg-gray-100 text-gray-600 rounded-l-md border border-r-0 border-gray-300 hover:bg-gray-200 active:bg-gray-300 focus:outline-none"
+                              className="px-2 py-2 bg-gray-50 text-gray-600 border border-r-0 border-gray-300 hover:bg-gray-100 active:bg-gray-200 focus:outline-none"
                             >
                               -
                             </button>
@@ -231,12 +231,12 @@ export default function ReferralRewards() {
                               min="0"
                               value={level.accounts}
                               onChange={(e) => handleLevelDataChange(index, 'accounts', Number(e.target.value))}
-                              className="block w-full text-center border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-                              style={{ borderRadius: 0 }}
+                              className="block w-full text-center border-gray-300 focus:ring-teal-500 focus:border-teal-500 text-sm"
+                              style={{ borderRadius: 0, minWidth: 0 }}
                             />
                             <button
                               onClick={() => handleLevelDataChange(index, 'accounts', level.accounts + 1)}
-                              className="px-2 py-1 bg-gray-100 text-gray-600 rounded-r-md border border-l-0 border-gray-300 hover:bg-gray-200 active:bg-gray-300 focus:outline-none"
+                              className="px-2 py-2 bg-gray-50 text-gray-600 border border-l-0 border-gray-300 hover:bg-gray-100 active:bg-gray-200 focus:outline-none"
                             >
                               +
                             </button>
@@ -246,10 +246,10 @@ export default function ReferralRewards() {
                           <label className="block text-xs text-gray-500 mb-1">
                             {t('promotion.referral.investment')} (ASC)
                           </label>
-                          <div className="flex items-center">
+                          <div className="flex items-center shadow-sm rounded-md overflow-hidden">
                             <button
                               onClick={() => handleLevelDataChange(index, 'investment', Math.max(100, level.investment - 100))}
-                              className="px-2 py-1 bg-gray-100 text-gray-600 rounded-l-md border border-r-0 border-gray-300 hover:bg-gray-200 active:bg-gray-300 focus:outline-none"
+                              className="px-2 py-2 bg-gray-50 text-gray-600 border border-r-0 border-gray-300 hover:bg-gray-100 active:bg-gray-200 focus:outline-none whitespace-nowrap"
                             >
                               -100
                             </button>
@@ -259,12 +259,12 @@ export default function ReferralRewards() {
                               step="100"
                               value={level.investment}
                               onChange={(e) => handleLevelDataChange(index, 'investment', Number(e.target.value))}
-                              className="block w-full text-center border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-                              style={{ borderRadius: 0 }}
+                              className="block w-full text-center border-gray-300 focus:ring-teal-500 focus:border-teal-500 text-sm"
+                              style={{ borderRadius: 0, minWidth: 0 }}
                             />
                             <button
                               onClick={() => handleLevelDataChange(index, 'investment', level.investment + 100)}
-                              className="px-2 py-1 bg-gray-100 text-gray-600 rounded-r-md border border-l-0 border-gray-300 hover:bg-gray-200 active:bg-gray-300 focus:outline-none"
+                              className="px-2 py-2 bg-gray-50 text-gray-600 border border-l-0 border-gray-300 hover:bg-gray-100 active:bg-gray-200 focus:outline-none whitespace-nowrap"
                             >
                               +100
                             </button>

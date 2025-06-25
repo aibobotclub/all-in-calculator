@@ -16,7 +16,11 @@ export default function RootLayout({
 
   return (
     <html lang={i18n.language}>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} overflow-x-hidden`}>
+        <div className="min-w-[320px] overflow-x-hidden">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
