@@ -1,20 +1,28 @@
 {
   "calculator": {
-    "title": "All-in Calculator",
+    "title": "Calculator",
     "subtitle": "ASC Staking Simulator",
+    "tabs": {
+      "staking": "Staking Calculator",
+      "referral": "Referral Calculator",
+      "investment": "Investment",
+      "rewards": "Rewards",
+      "referralRewards": "Referral Rewards",
+      "communityRewards": "Community Rewards"
+    },
     "input": {
       "investment": "Investment Amount (USDT)",
       "stakingPeriod": "Staking Period",
       "releasePeriod": "Release Period",
-      "days": "Days",
+      "days": "days",
       "calculate": "Calculate"
     },
     "result": {
       "ascAmount": "ASC Amount",
-      "totalRelease": "Total Release ANT",
-      "monthlyRelease": "Monthly Release ANT",
-      "dailyAverage": "Daily Average ANT",
-      "viewDetails": "View Daily Details"
+      "totalRelease": "Total Release",
+      "monthlyRelease": "Monthly Release",
+      "dailyAverage": "Daily Average",
+      "viewDetails": "View Details"
     },
     "settings": {
       "title": "Settings",
@@ -25,10 +33,30 @@
       "dailyFrequency": "Daily Frequency",
       "times": "times/day",
       "stakingBonus": "Staking Period Bonus",
-      "burnFee": "Release Period Burn Fee",
+      "burnFee": "Burn Fee",
       "save": "Save Settings",
       "back": "Back to Calculator",
-      "fixedParams": "Fixed Parameters"
+      "fixedParams": "Fixed Parameters",
+      "rewards": {
+        "title": "Reward Settings",
+        "referralTitle": "Referral Rewards",
+        "communityTitle": "Community Rewards",
+        "rewardRate": "Reward Rate",
+        "range": "Range",
+        "requirements": "Requirements",
+        "paths": "Paths",
+        "pathAmount": "Path Amount",
+        "downline": "Downline",
+        "referralLevelN": "Level {{n}} Reward"
+      },
+      "staking": {
+        "title": "Staking Settings",
+        "stakingPeriod": "Staking Period",
+        "releasePeriod": "Release Period",
+        "dailyROI": "Daily ROI",
+        "platformFee": "Platform Fee",
+        "burnFee": "Burn Fee"
+      }
     },
     "details": {
       "title": "Daily Details",
@@ -50,5 +78,83 @@
       "reinvestEarnings": "Reinvest Earnings",
       "totalDailyANT": "Daily Total"
     }
+  },
+  "promotion": {
+    "back": "Back",
+    "title": "Promotion Rewards",
+    "referral": {
+      "tabTitle": "Referral Rewards",
+      "detailsTitle": "Referral Rewards Details",
+      "directAccounts": "Direct Referrals",
+      "directInvestment": "Direct Investment",
+      "downlineAccounts": "Downline Accounts",
+      "accounts": "Accounts",
+      "investment": "Investment",
+      "rewardRate": "Reward Rate",
+      "calculate": "Calculate Rewards",
+      "viewDetails": "View Details",
+      "dailyAverage": "Daily Average",
+      "monthlyReward": "Monthly Reward",
+      "yearlyReward": "Yearly Reward",
+      "totalReward": "Total Reward",
+      "calculationNote": "* The calculation includes daily rewards and reinvestment returns",
+      "day": "Day",
+      "teamANT": "Team ANT",
+      "dailyReward": "Daily Reward",
+      "accumulatedReward": "Accumulated Reward",
+      "levelN": "Level n",
+      "accountsRange": "Minimum Accounts: min",
+      "minInvestment": "Minimum Investment: amount ASC"
+    },
+    "community": {
+      "title": "Community Rewards",
+      "level": "Community Level",
+      "requirements": "Requirements",
+      "rewards": "Reward Details",
+      "dailyReward": "Daily Reward",
+      "day": "Day",
+      "days": "Days",
+      "viewDetails": "View Detailed Rewards",
+      "detailsTitle": "Community Rewards Details - {{level}}",
+      "rewardRate": "Reward Rate",
+      "range": "Range",
+      "stakingPeriod": "Staking Period",
+      "communityN": "Community {{n}}",
+      "levelRequirement": "Reach {{level}}",
+      "stakingRequirement": "Reach {{amount}} USDT",
+      "dailyAverage": "Average Daily Output",
+      "monthlyReward": "Monthly Total Reward",
+      "yearlyReward": "Yearly Total Reward",
+      "totalReward": "Total Reward",
+      "teamOutput": "Team ANT Output",
+      "accumulatedReward": "Accumulated Reward",
+      "month": "Month",
+      "year": "Year",
+      "tabTitle": "Community Rewards",
+      "calculationNote": "Note: Estimated based on 540 days team staking with 5 days release period",
+      "totalStaking": "Total Staking",
+      "initialStaking": "Initial Staking",
+      "currentStaking": "Current Staking"
+    }
+  },
+  "common": {
+    "day": "Day",
+    "month": "Month",
+    "year": "Year",
+    "amount": "Amount",
+    "rate": "Rate",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "pageSize": "Page Size",
+    "itemsPerPage": "items per page",
+    "totalItems": "Total: total items",
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "results": "results",
+    "prev": "Previous",
+    "next": "Next"
   }
 } 

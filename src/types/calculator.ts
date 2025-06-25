@@ -30,4 +30,54 @@ export interface CalculationResult {
   dailyAverageANT: number;    // 平均日收益（不包括本金）
   dailyDetails: DailyDetail[]; // 每日详情
   ascAmount: number;          // ASC数量
+}
+
+// 推荐奖励相关类型
+export interface ReferralReward {
+  level: number;          // 代数 1-20
+  accounts: number;       // 账户数
+  investment: number;     // 每个账户投资金额
+  stakingPeriod: StakingPeriod; // 质押周期
+  releasePeriod: ReleasePeriod; // 释放周期
+}
+
+export interface ReferralRewardResult {
+  level: number;
+  dailyANT: number;
+  rewardRate: number;
+  dailyReward: number;
+}
+
+// 社区奖励相关类型
+export type CommunityLevel = 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8' | 'V9';
+
+export interface CommunityRequirements {
+  paths: number;           // 路径数
+  pathAmount: number | number[]; // 路径金额要求
+  downlineV: CommunityLevel | null; // 下线等级要求
+  downlineCount: number;   // 下线数量要求
+}
+
+export interface CommunityRewardRange {
+  min: number;
+  max: number;
+}
+
+export interface CommunityLevelConfig {
+  requirements: CommunityRequirements;
+  rewardRange: CommunityRewardRange;
+}
+
+export interface CommunityRewardResult {
+  level: CommunityLevel;
+  totalStaking: number;   // 总质押量
+  rewardRate: number;     // 奖励比例
+  dailyReward: number;    // 每日奖励
+  isQualified: boolean;   // 是否达标
+  missingRequirements?: {
+    paths?: number;
+    pathAmount?: number;
+    downlineV?: CommunityLevel;
+    downlineCount?: number;
+  };
 } 
