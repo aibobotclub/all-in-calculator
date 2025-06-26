@@ -209,25 +209,25 @@ export default function CommunityRewards() {
                   {t('promotion.community.rewardRate')}
                 </label>
                 <span className="text-sm text-gray-500">
-                  {t('promotion.community.range')}: {(currentRange.min * 100).toFixed(1)}% - {(currentRange.max * 100).toFixed(1)}%
+                  {t('promotion.community.range')}: {Math.round(currentRange.min * 100)}% - {Math.round(currentRange.max * 100)}%
                 </span>
               </div>
               <div className="flex items-center space-x-4">
                 <input
                   type="range"
-                  min={currentRange.min * 100}
-                  max={currentRange.max * 100}
-                  step="0.1"
-                  value={rewardRate * 100}
+                  min={Math.round(currentRange.min * 100)}
+                  max={Math.round(currentRange.max * 100)}
+                  step="1"
+                  value={Math.round(rewardRate * 100)}
                   onChange={(e) => handleRateChange(Number(e.target.value) / 100)}
                   className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                 />
                 <input
                   type="number"
-                  min={currentRange.min * 100}
-                  max={currentRange.max * 100}
-                  step="0.1"
-                  value={(rewardRate * 100).toFixed(1)}
+                  min={Math.round(currentRange.min * 100)}
+                  max={Math.round(currentRange.max * 100)}
+                  step="1"
+                  value={Math.round(rewardRate * 100)}
                   onChange={(e) => handleRateChange(Number(e.target.value) / 100)}
                   className="w-20 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
