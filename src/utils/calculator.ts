@@ -25,6 +25,7 @@ interface ReinvestRecord {
   amount: number; // 复投本金
   maturityDay: number; // 到期日
   dailyReturn: number; // 每日产生的收益
+  startDay: number; // 开始产生收益的日期
 }
 
 export function calculateInvestment(params: CalculatorParams): CalculationResult {
@@ -52,7 +53,7 @@ export function calculateInvestment(params: CalculatorParams): CalculationResult
   const dailyReturns: DailyReturn[] = [];
   
   // 记录复投记录
-  let reinvestRecords: ReinvestRecord[] = [];
+  const reinvestRecords: ReinvestRecord[] = [];
   
   // 计算每日详情
   const dailyDetails: DailyDetail[] = [];
@@ -60,40 +61,55 @@ export function calculateInvestment(params: CalculatorParams): CalculationResult
   let totalMaturityReleaseANT = 0; // 总到期释放（包括本金）
   let totalReleaseWithoutMaturity = 0; // 不包括本金释放的总收益（用于计算平均值）
 
-  for (let day = 1; day <= stakingPeriod; day++) {
-    // 计算当天的原始收益
-    const reinvestANT = totalDailyReturn * DEFAULT_PARAMS.reinvestRatio; // 30%进入复投
-    const releaseBeforeBurn = totalDailyReturn * DEFAULT_PARAMS.releaseRatio; // 70%进入释放
-    const releaseAfterBurn = releaseBeforeBurn * (1 - burnFee);
-    
-    // 创建释放计划（平均分配到释放周期的每一天）
-    const releaseSchedule = new Array(releasePeriod).fill(releaseAfterBurn / releasePeriod);
-    
-    // 记录今天的原始收益和释放计划
-    dailyReturns.push({
-      originalReturn: totalDailyReturn,
-      releaseSchedule
-    });
+  // 计算需要显示的总天数
+  // 需要考虑：1. 释放期延续 2. 复投到期时间
+  // 最后一次复投在 stakingPeriod-1 天，到期在 stakingPeriod-1+31 天
+  const lastReinvestMaturityDay = stakingPeriod > 1 ? stakingPeriod - 1 + 31 : 0;
+  const releaseEndDay = stakingPeriod + releasePeriod - 1;
+  const totalDays = Math.max(releaseEndDay, lastReinvestMaturityDay, stakingPeriod);
 
-    // 添加今天的复投记录（30天后释放本金）
-    if (reinvestANT > 0) {
-      // 计算复投每日产生的收益（利润*次数）
-      const reinvestDailyReturn = reinvestANT * dailyROI * DEFAULT_PARAMS.dailyFrequency * (1 + stakingBonus);
-      reinvestRecords.push({
-        amount: reinvestANT,
-        maturityDay: day + 30,
-        dailyReturn: reinvestDailyReturn
+  for (let day = 1; day <= totalDays; day++) {
+    // 只在质押期内生成新的收益
+    let reinvestANT = 0;
+    if (day <= stakingPeriod) {
+      // 计算当天的原始收益
+      reinvestANT = day < stakingPeriod ? totalDailyReturn * DEFAULT_PARAMS.reinvestRatio : 0; // 质押期最后一天不复投
+      const releaseBeforeBurn = day < stakingPeriod 
+        ? totalDailyReturn * DEFAULT_PARAMS.releaseRatio 
+        : totalDailyReturn; // 质押期最后一天100%释放
+      const releaseAfterBurn = releaseBeforeBurn * (1 - burnFee);
+      
+      // 创建释放计划（平均分配到释放周期的每一天）
+      const releaseSchedule = new Array(releasePeriod).fill(releaseAfterBurn / releasePeriod);
+      
+      // 记录今天的原始收益和释放计划
+      dailyReturns.push({
+        originalReturn: totalDailyReturn,
+        releaseSchedule
       });
+
+      // 添加今天的复投记录（从第二天开始计算，30天后释放本金）
+      if (reinvestANT > 0 && day < stakingPeriod) { // 最后一天不再复投
+        // 计算复投每日产生的收益（利润*次数）
+        const reinvestDailyReturn = reinvestANT * dailyROI * DEFAULT_PARAMS.dailyFrequency * (1 + stakingBonus);
+        reinvestRecords.push({
+          amount: reinvestANT,
+          maturityDay: day + 31, // 从第二天开始算30天，所以是day+31
+          dailyReturn: reinvestDailyReturn,
+          startDay: day + 1 // 复投收益从第二天开始
+        });
+      }
     }
 
     // 计算当天的总释放量
     let dayReleaseANT = 0;
     
-    // 1. 计算之前天数的释放计划在今天的释放量
-    for (let i = 0; i < dailyReturns.length; i++) {
-      const releaseDay = day - i - 1; // 第几天的释放
-      if (releaseDay >= 0 && releaseDay < releasePeriod) {
-        dayReleaseANT += dailyReturns[i].releaseSchedule[releaseDay];
+    // 1. 计算所有之前天数的释放计划在今天的释放量
+    for (let i = 0; i < Math.min(day, stakingPeriod); i++) {
+      const sourceDay = i; // 收益产生的天数（0-based）
+      const releaseDay = day - i - 1; // 从产生收益那天算起的第几天释放（0-based）
+      if (releaseDay >= 0 && releaseDay < releasePeriod && sourceDay < dailyReturns.length) {
+        dayReleaseANT += dailyReturns[sourceDay].releaseSchedule[releaseDay];
       }
     }
 
@@ -103,23 +119,22 @@ export function calculateInvestment(params: CalculatorParams): CalculationResult
 
     // 遍历所有复投记录
     for (const record of reinvestRecords) {
-      // 累加复投产生的每日收益
-      reinvestDailyReturn += record.dailyReturn;
+      // 只有当前天数大于等于开始日期且未到期时才累加复投产生的每日收益
+      if (day >= record.startDay && day < record.maturityDay) {
+        reinvestDailyReturn += record.dailyReturn;
+      }
       
       // 如果复投到期，释放本金
       if (record.maturityDay === day) {
         reinvestMaturityRelease += record.amount;
       }
     }
-    
-    // 移除到期的复投记录
-    reinvestRecords = reinvestRecords.filter(record => record.maturityDay > day);
 
-    // 3. 如果是质押到期日，释放本金
-    let stakingMaturityRelease = 0;
-    if (day === stakingPeriod) {
-      stakingMaturityRelease = ascAmount;
-    }
+          // 3. 如果是质押到期日，释放本金
+      let stakingMaturityRelease = 0;
+      if (day === stakingPeriod) {
+        stakingMaturityRelease = ascAmount;
+      }
 
     // 计算当天的总收益（不包括本金释放）
     const dailyTotalANT = dayReleaseANT + reinvestDailyReturn;

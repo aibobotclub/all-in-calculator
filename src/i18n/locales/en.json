@@ -22,7 +22,8 @@
       "totalRelease": "Total Release",
       "monthlyRelease": "Monthly Release",
       "dailyAverage": "Daily Average",
-      "viewDetails": "View Details"
+      "viewDetails": "View Details",
+      "enterAmount": "Please enter investment amount to calculate"
     },
     "settings": {
       "title": "Settings",
@@ -69,7 +70,11 @@
       "roi": "ROI",
       "back": "Back to Calculator",
       "overview": "Investment Overview",
-      "usdtValue": "USDT Value"
+      "usdtValue": "USDT Value",
+      "invalidParams": "Invalid Parameters",
+      "invalidAmountMessage": "Please enter a valid investment amount",
+      "backToCalculator": "Back to Calculator",
+      "noData": "No data available"
     },
     "chart": {
       "title": "Daily ANT Release Chart",

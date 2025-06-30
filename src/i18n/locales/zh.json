@@ -15,7 +15,8 @@
       "totalRelease": "总释放量",
       "monthlyRelease": "每月释放",
       "dailyAverage": "每日平均",
-      "viewDetails": "查看详情"
+      "viewDetails": "查看详情",
+      "enterAmount": "请输入投资金额进行计算"
     },
     "settings": {
       "title": "设置",
@@ -62,7 +63,11 @@
       "roi": "收益率",
       "back": "返回",
       "overview": "投资概览",
-      "usdtValue": "USDT 价值"
+      "usdtValue": "USDT 价值",
+      "invalidParams": "参数无效",
+      "invalidAmountMessage": "请输入有效的投资金额",
+      "backToCalculator": "返回计算器",
+      "noData": "暂无数据"
     },
     "chart": {
       "title": "ANT 每日释放图表",

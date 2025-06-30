@@ -50,9 +50,23 @@ export default function Home() {
     }
   }, []);
 
+  // 当参数改变时自动计算（可选）
+  useEffect(() => {
+    if (params.investmentAmount > 0) {
+      const calculationResult = calculateInvestment(params);
+      setResult(calculationResult);
+    } else {
+      setResult(null);
+    }
+  }, [params]);
+
   const handleCalculate = () => {
-    const calculationResult = calculateInvestment(params);
-    setResult(calculationResult);
+    if (params.investmentAmount > 0) {
+      const calculationResult = calculateInvestment(params);
+      setResult(calculationResult);
+    } else {
+      setResult(null);
+    }
   };
 
   const handleViewDetails = () => {
@@ -219,8 +233,8 @@ export default function Home() {
             </div>
 
             {/* Results Section */}
-            {result && (
-              <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+              {result ? (
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-500">
@@ -258,15 +272,21 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <button
-                    onClick={handleViewDetails}
-                    className="w-full bg-gradient-to-r from-emerald-50 to-teal-50 text-teal-600 py-3 px-4 rounded-lg hover:from-emerald-100 hover:to-teal-100 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02] shadow-sm"
-                  >
-                    {t('calculator.result.viewDetails')}
-                  </button>
+                  {result && result.totalReleaseANT > 0 && (
+                    <button
+                      onClick={handleViewDetails}
+                      className="w-full bg-gradient-to-r from-emerald-50 to-teal-50 text-teal-600 py-3 px-4 rounded-lg hover:from-emerald-100 hover:to-teal-100 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02] shadow-sm"
+                    >
+                      {t('calculator.result.viewDetails')}
+                    </button>
+                  )}
                 </div>
-              </div>
-            )}
+              ) : (
+                <div className="text-center py-12">
+                  <p className="text-gray-500 text-lg">{t('calculator.result.enterAmount', '请输入投资金额进行计算')}</p>
+                </div>
+              )}
+            </div>
 
             {/* Chart Section */}
             {result && (
